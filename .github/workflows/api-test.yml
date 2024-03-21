@@ -14,4 +14,4 @@ jobs:
           baseUrl: https://api.getport.io
           operation: PATCH_RUN
           runId: ${{fromJson(inputs.port_payload).context.runId}}
-          logMessage: "Response code: 200. Response: '{'test':'success'}'"
+          logMessage: Response code 200
