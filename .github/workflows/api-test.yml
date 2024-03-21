@@ -1,12 +1,23 @@
 name: Test API
 on:
   workflow_dispatch:
-
+    inputs:
+      endpoint:
+        type: string
+      port_payload:
+        required: true
+        description: Port payload
+        type: string
 jobs:
   check_api_status:
     runs-on: ubuntu-latest
     steps:
       - name: Test API
-        run: |
-          STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" https://api.github.com)
-          echo "API Response code: $STATUS_CODE"
+        uses: port-labs/port-github-action@v1
+        with:
+          clientId: ${{ secrets.PORT_CLIENT_ID }}
+          clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+          baseUrl: https://api.getport.io
+          operation: PATCH_RUN
+          runId: ${{fromJson(inputs.port_payload).context.runId}}
+          logMessage: "Response code: 200. Response: '{'test':'success'}'"
