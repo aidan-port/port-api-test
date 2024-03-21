@@ -1,13 +1,7 @@
 name: Test API
 on:
-  workflow_dispatch:
-    inputs:
-      endpoint:
-        type: string
-      port_payload:
-        required: true
-        description: Port payload
-        type: string
+  workflow_dispatch
+  
 jobs:
   check_api_status:
     runs-on: ubuntu-latest
